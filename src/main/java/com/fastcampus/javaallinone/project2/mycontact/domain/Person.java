@@ -6,12 +6,13 @@ import lombok.experimental.Accessors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @RequiredArgsConstructor
 @Builder
 public class Person {
@@ -38,4 +39,7 @@ public class Person {
     private String job;
 
     private String phoneNumber;
+
+    @OneToOne
+    private Block block;
 }

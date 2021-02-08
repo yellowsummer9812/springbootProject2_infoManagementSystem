@@ -40,13 +40,12 @@ class PersonRepositoryTest {
 
     @Test
     void constructorTest(){
-        Person person1 = new Person(1L, "martin", 10, "reading", "A", "분당", LocalDate.of(2021,02,06),"programmer", "010-1111-2222");
         Person person2 = new Person("martin", 10, "A");
     }
 
     @Test
     void hashCodeAndEquals(){
-        Person person1 = new Person("martin", 10,"A");
+        Person person1 = new Person("martin", 10, "A");
         Person person2 = new Person("martin", 10, "B");
 
         System.out.println(person1.equals(person2));
