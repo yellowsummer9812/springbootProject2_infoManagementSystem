@@ -27,9 +27,21 @@ public class PersonService {
         // @OneToOne 지정하지 않았을 때 사용
         //List<Block> blocks = blockRepository.findAll();
         //List<String> blockNames = blocks.stream().map(Block::getName).collect(Collectors.toList()); // blocks에 있는 모든 요소들에 대해 getName() 실행
-
         //return people.stream().filter(person -> !blockNames.contains(person.getName())).collect(Collectors.toList());
-        return people.stream().filter(person -> person.getBlock() == null).collect(Collectors.toList());
+
+        // @OneToOnE 지정했을 때 사용
+        //return people.stream().filter(person -> person.getBlock() == null).collect(Collectors.toList());
+
+        // Query Method 사용했을 때
+        return personRepository.findByBlockIsNull();
+    }
+
+    public List<Person> getPeopleByName(String name){
+        //List<Person> people = personRepository.findAll();
+
+        //return people.stream().filter(person -> person.getName().equals(name)).collect(Collectors.toList());
+        // Query method 활용하면
+        return personRepository.findByName(name);
     }
 
     @Transactional(readOnly = true)
