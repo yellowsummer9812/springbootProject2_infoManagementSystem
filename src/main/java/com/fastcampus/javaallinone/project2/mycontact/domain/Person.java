@@ -1,8 +1,9 @@
 package com.fastcampus.javaallinone.project2.mycontact.domain;
 
+import com.fastcampus.javaallinone.project2.mycontact.controller.dto.PersonDto;
 import com.fastcampus.javaallinone.project2.mycontact.domain.dto.Birthday;
 import lombok.*;
-
+import org.springframework.util.StringUtils;
 
 
 import javax.persistence.*;
@@ -53,4 +54,34 @@ public class Person {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Block block;
+
+    // 불필요한 부분까지 update시켜버리는 경우를 방지하기 위해서
+    public void set(PersonDto personDto){
+
+        // setting하지 않은 경우에 age값을  저장하지 않도록 하겠다.
+        // 즉, setting되어있는 경우에만 age값을 저장하도록 하겠다.
+        if(personDto.getAge() != 0){
+            this.setAge(personDto.getAge());
+        }
+
+        if(!StringUtils.isEmpty(personDto.getHobby())){
+            this.setHobby(personDto.getHobby());
+        }
+
+        if(!StringUtils.isEmpty(personDto.getBloodType())){
+            this.setBloodType(personDto.getBloodType());
+        }
+
+        if(!StringUtils.isEmpty(personDto.getAddress())){
+            this.setAddress(personDto.getAddress());
+        }
+
+        if(!StringUtils.isEmpty(personDto.getJob())){
+            this.setJob(personDto.getJob());
+        }
+
+        if(!StringUtils.isEmpty(personDto.getPhoneNumber())){
+            this.setPhoneNumber(personDto.getPhoneNumber());
+        }
+    }
 }
