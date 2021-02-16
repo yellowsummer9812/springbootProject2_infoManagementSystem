@@ -3,6 +3,8 @@ package com.fastcampus.javaallinone.project2.mycontact.domain;
 import com.fastcampus.javaallinone.project2.mycontact.controller.dto.PersonDto;
 import com.fastcampus.javaallinone.project2.mycontact.domain.dto.Birthday;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Where;
 import org.springframework.util.StringUtils;
 
 
@@ -18,6 +20,7 @@ import java.time.LocalDate;
 @Data
 @RequiredArgsConstructor
 @Builder
+@Where(clause = "deleted = false")
 public class Person {
 
     @Id // identifier
@@ -50,6 +53,9 @@ public class Person {
 
     @ToString.Exclude
     private String phoneNumber;
+
+    @ColumnDefault("0")
+    private boolean deleted; // 삭제 여부를 알려주는 field
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
