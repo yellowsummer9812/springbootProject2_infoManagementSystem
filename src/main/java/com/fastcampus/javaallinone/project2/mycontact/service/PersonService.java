@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,7 +47,10 @@ public class PersonService {
 
     @Transactional(readOnly = true)
     public Person getPerson(Long id){
-        Person person = personRepository.findById(id).get();
+        //Person person = personRepository.findById(id).get();
+
+        Person person = personRepository.findById(id).orElse(null); // 값이 없으면 null 리턴, 아니면 get
+
 
         log.info("person : {}", person); // production에 배포됐을 때 log출력 제한할 수 있는 장점
 
