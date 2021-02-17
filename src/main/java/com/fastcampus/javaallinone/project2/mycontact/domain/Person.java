@@ -50,19 +50,19 @@ public class Person {
     // 불필요한 부분까지 update시켜버리는 경우를 방지하기 위해서
     public void set(PersonDto personDto){
 
-        if(!StringUtils.isEmpty(personDto.getHobby())){
+        if(personDto.getHobby() != null){
             this.setHobby(personDto.getHobby());
         }
 
-        if(!StringUtils.isEmpty(personDto.getAddress())){
+        if(personDto.getAddress() != null){
             this.setAddress(personDto.getAddress());
         }
 
-        if(!StringUtils.isEmpty(personDto.getJob())){
+        if(personDto.getJob() != null){
             this.setJob(personDto.getJob());
         }
 
-        if(!StringUtils.isEmpty(personDto.getPhoneNumber())){
+        if(personDto.getPhoneNumber() != null){
             this.setPhoneNumber(personDto.getPhoneNumber());
         }
 
