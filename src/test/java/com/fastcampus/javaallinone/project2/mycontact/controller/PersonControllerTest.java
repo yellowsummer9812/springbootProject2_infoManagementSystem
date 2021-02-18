@@ -3,6 +3,7 @@ package com.fastcampus.javaallinone.project2.mycontact.controller;
 import com.fastcampus.javaallinone.project2.mycontact.controller.dto.PersonDto;
 import com.fastcampus.javaallinone.project2.mycontact.domain.Person;
 import com.fastcampus.javaallinone.project2.mycontact.domain.dto.Birthday;
+import com.fastcampus.javaallinone.project2.mycontact.exception.handler.GlobalExceptionHandler;
 import com.fastcampus.javaallinone.project2.mycontact.repository.PersonRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.NestedServletException;
 
 import java.time.LocalDate;
@@ -34,13 +36,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PersonControllerTest {
 
     @Autowired
-    private PersonController personController;
-    @Autowired
     private PersonRepository personRepository;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    private MappingJackson2HttpMessageConverter messageConverter; // 실제 서비스 코드에 있는 메세지컨버터를 테스트에 주입
+    private WebApplicationContext wac;
 
     private MockMvc mockMvc;
 
@@ -48,8 +48,7 @@ class PersonControllerTest {
     @BeforeEach
     void beforeEach(){
         mockMvc = MockMvcBuilders
-                .standaloneSetup(personController)
-                .setMessageConverters(messageConverter)
+                .webAppContextSetup(wac)
                 .alwaysDo(print())
                 .build();
     }
